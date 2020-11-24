@@ -1,0 +1,12 @@
+ve/
+venv/
+lib/
+out/
+__pycache__
+.idea*
+.DS_Store
+.ipynb_checkpoints/
+.idea/misc.xml
+pip-selfcheck.json
+pyvenv.cfg
+twitter_keys.json
