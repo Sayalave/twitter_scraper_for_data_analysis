@@ -1,0 +1,12 @@
+.git
+.ipynb_checkpoints
+.idea
+Dockerfile
+__pycache__
+.DS_Store
+.gitignore
+README.md
+ve/
+venv/
+out/
+data/

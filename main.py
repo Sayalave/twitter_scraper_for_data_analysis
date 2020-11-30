@@ -18,6 +18,7 @@ class Execute(object):
         ap.add_argument("--save_path", required=True)
         ap.add_argument("--keys_path", required=True)
         ap.add_argument("--delay", required=False)
+        ap.add_argument("--chromedriver_path", required=False)
         self.args = vars(ap.parse_args())
         self.path_raw_data = f"{os.path.expanduser(self.args['save_path'])}/" \
                              f"{self.args['keyword']}/raw_data/df_raw.csv"
@@ -30,7 +31,8 @@ class Execute(object):
             keyword_type=self.args['keyword_type'],
             save_path=self.args['save_path'],
             keys_path=self.args['keys_path'],
-            delay=self.args['delay']
+            delay=self.args['delay'],
+            chromedriver_path=self.args['chromedriver_path']
         )
         extract.extract_all_ids()
         extract.get_metadata()

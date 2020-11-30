@@ -312,7 +312,9 @@ class Transform(object):
         df['hashtags'] = df['hashtags'].apply(
             lambda x: literal_eval(x) if pd.notnull(x) else '')
         hashtags = [
-            user for sublist in df['hashtags'].values for user in sublist]
+            h for sublist in df['hashtags'].values for h in sublist]
+        df = pd.DataFrame(hashtags, columns=['hashtags'])
+
         hashtags_empty = True if len(hashtags) == 0 else False
         if hashtags_empty:
             return pd.DataFrame()
@@ -326,7 +328,7 @@ class Transform(object):
             return
 
         # Count number of times each hashtag was mentioned
-        df = df.hashtags.value_counts() \
+        df = df.hashtags.astype(str).value_counts() \
                .reset_index() \
                .rename({'index': 'hashtags', 'hashtags': 'hashtags_count'},
                        axis=1) \

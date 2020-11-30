@@ -242,10 +242,15 @@ class Visualize(object):
         self.func_save_html(save_chart_path, h.htmlcontent)
 
     def visualize_most_retweeted_users(self):
-        df_path = f'{os.path.expanduser(self.save_path)}/' \
-                  f'{self.keyword}/most_retweeted_users/' \
-                  f'most_retweeted_users.csv'
-        df = pd.read_csv(df_path)
+        try:
+            df_path = f'{os.path.expanduser(self.save_path)}/' \
+                      f'{self.keyword}/most_retweeted_users/' \
+                      f'most_retweeted_users.csv'
+            df = pd.read_csv(df_path)
+        except FileNotFoundError as e:
+            print(f'There is no data for most retweeted users, so no '
+                  f'visualization will be generated')
+            return
         top_users = 20
         df = df.head(top_users)
 

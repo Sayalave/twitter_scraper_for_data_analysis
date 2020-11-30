@@ -4,7 +4,7 @@ import tweepy
 from save import SaveTwitterData
 from selenium import webdriver
 from time import sleep
-import pickle
+import pickle5 as pickle
 import json
 import pandas as pd
 
@@ -12,7 +12,7 @@ import pandas as pd
 class Scrape(object):
 
     def __init__(self, keyword, start, end, keyword_type, save_path, keys_path,
-                 delay=10):
+                 delay=10, chromedriver_path='/usr/local/bin/chromedriver'):
         """
         Collects all tweet ids published in a given time frame that include a
         given keyword or hashtag, or published by a given account, depending
@@ -40,6 +40,7 @@ class Scrape(object):
         self.keyword_type = keyword_type.lower()
         self.delay = int(delay)
         self.save_path = os.path.expanduser(save_path)
+        self.chromedriver_path = chromedriver_path
 
         # Get twitter keys
         with open(keys_path, 'r') as file:
@@ -75,7 +76,6 @@ class Scrape(object):
                 ids = list(set([item for sublist in list_of_lists
                                 if not not sublist for item in sublist]))
 
-        # Display number of ids that will be processed
         print('Total ids to be processed: {}'.format(len(ids)))
 
         # Set credentials
@@ -112,10 +112,9 @@ class Scrape(object):
         start_date = datetime.datetime.strptime(self.start, '%Y-%m-%d')
         final_date = datetime.datetime.strptime(self.end, '%Y-%m-%d')
 
-        # Iterate over each all days between start_date and end_date
+        # Iterate over each day between start_date and end_date
         ids_pickle_path = f"{self.path_raw_data}/ids.pickle"
         while str(start_date.date()) != str(final_date.date()):
-
             # Load previously saved ids if available. If note, start from zero
             if os.path.exists(ids_pickle_path):
                 with open(ids_pickle_path, 'rb') as handle:
@@ -155,7 +154,8 @@ class Scrape(object):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver',
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        driver = webdriver.Chrome(executable_path=self.chromedriver_path,
                                   chrome_options=chrome_options)
         driver.get(url)
         sleep(self.delay)
@@ -201,7 +201,7 @@ class Scrape(object):
         # Make sure we don't have duplicated tweet ids
         ids = list(set(ids))
         print(f"We found {len(ids)} for the keyword {self.keyword} "
-              f"from {start_date} until {start_date} \n")
+              f"from {start_date} until {until} \n")
 
         # Close driver
         driver.quit()
