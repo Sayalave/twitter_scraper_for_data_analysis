@@ -12,8 +12,7 @@ import pandas as pd
 class Scrape(object):
 
     def __init__(self, keyword, start, end, keyword_type, keys_path,
-                 delay=10, chromedriver_path='/usr/local/bin/chromedriver',
-                 include_retweets='false'):
+                 delay=1, chromedriver_path='/usr/local/bin/chromedriver'):
         """
         Collects all tweet ids published in a given time frame that include a
         given keyword or hashtag, or published by a given account, depending
@@ -26,7 +25,7 @@ class Scrape(object):
         Args:
             - keyword (str): hashtag, account, or query. If it's query and more
                 than one word is used, white spaces should be passed as
-                underscores. If it's a hashtag, it should not include '#'.
+                underscores.
             - start (str): date when the data collection starts.
                 Format: 'YYYY-MM-DD'
             - end (str): date when the data collection ends.
@@ -37,14 +36,11 @@ class Scrape(object):
         # Set URL parameters
         self.start = start
         self.end = end
-        self.keyword = keyword.lower()
+        self.keyword = keyword.lower().replace('#', '')
         self.keyword_type = keyword_type.lower()
         self.delay = int(delay)
         self.save_path = os.path.expanduser('data')
         self.chromedriver_path = chromedriver_path
-        # noinspection SpellCheckingInspection
-        self.include_retweets = 'include%3Aretweets' \
-            if include_retweets.lower() == 'true' else ''
 
         # Get twitter keys
         with open(keys_path, 'r') as file:
@@ -229,16 +225,16 @@ class Scrape(object):
         if keyword_type == 'account':
             return f'https://twitter.com/search?f=tweets&vertical=default' \
                    f'&q=(from%3A{keyword})%20since%3A{since}' \
-                   f'%20until%3A{until}{self.include_retweets}&src=typed_query'
+                   f'%20until%3A{until}&src=typed_query'
         elif keyword_type == 'hashtag':
             return f'https://twitter.com/search?f=tweets&vertical=default' \
                    f'&q=(%23{keyword})%20since%3A{since}' \
-                   f'%20until%3A{until}{self.include_retweets}&src=typed_query'
+                   f'%20until%3A{until}&src=typed_query'
         elif keyword_type == 'query':
             keyword = keyword.replace("_", '%20')
             return f'https://twitter.com/search?f=tweets&vertical=default' \
                    f'&q={keyword}%20since%3A{since}' \
-                   f'%20until%3A{until}{self.include_retweets}&src=typed_query'
+                   f'%20until%3A{until}&src=typed_query'
         else:
             return print('Only user, hashtag or keyword data can be True')
 

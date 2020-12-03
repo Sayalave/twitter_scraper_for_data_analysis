@@ -432,8 +432,7 @@ class Transform(object):
         # Get one hot encoding of hashtags per tweet
         one_hot_encoding = pd.get_dummies(
             df.hashtags.apply(pd.Series).stack()).sum(level=0).astype(int)
-        # Get co occurrence matrix by multiplying the one hot encoding by
-        # its transpose
+        # Get co occurrence matrix
         df = one_hot_encoding.T.dot(one_hot_encoding)
 
         save_data = Save(

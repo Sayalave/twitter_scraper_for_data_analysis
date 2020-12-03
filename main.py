@@ -11,14 +11,14 @@ import os
 class Execute(object):
     def __init__(self):
         ap = argparse.ArgumentParser()
-        ap.add_argument("--keyword", required=True)
-        ap.add_argument("--start", required=True)
-        ap.add_argument("--end", required=True)
-        ap.add_argument("--keyword_type", required=True)
-        ap.add_argument("--keys_path", required=True)
-        ap.add_argument("--delay", required=False)
-        ap.add_argument("--chromedriver_path", required=False)
-        ap.add_argument("--include_retweets", required=False)
+        ap.add_argument("-keyword", required=True)
+        ap.add_argument("-start", required=True)
+        ap.add_argument("-end", required=True)
+        ap.add_argument("-keyword_type", required=True)
+        ap.add_argument("-keys_path", required=True)
+        ap.add_argument("--delay", required=False, default='1')
+        ap.add_argument("--chromedriver_path", required=False,
+                        default='/usr/local/bin/chromedriver')
         self.args = vars(ap.parse_args())
         self.path_raw_data = f"{os.path.expanduser('data')}/" \
                              f"{self.args['keyword']}/raw_data/df_raw.csv"
@@ -31,8 +31,7 @@ class Execute(object):
             keyword_type=self.args['keyword_type'],
             keys_path=self.args['keys_path'],
             delay=self.args['delay'],
-            chromedriver_path=self.args['chromedriver_path'],
-            include_retweets=self.args['include_retweets']
+            chromedriver_path=self.args['chromedriver_path']
         )
         scraper.extract_all_ids()
         scraper.get_metadata()
