@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 ENV LC_ALL=C.UTF-8 LANG=C.UTF-8
 
 WORKDIR /app
-COPY . /app
+COPY .. /app
 
 RUN apt-get update && apt install -y python3 python3-pip chromium-chromedriver
 RUN pip3 install pip-tools

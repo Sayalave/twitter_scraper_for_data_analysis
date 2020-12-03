@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/highcharts-more.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script>
+    </head>
+    <body style="margin:0;padding:0">
+                <div id="container" style="width:1000px;height:700px;">Loading....</div>
+
+
+    <script>
+        $(function(){
+
+
+
+
+
+            Highcharts.setOptions({"global": {}, "lang": {}});
+            var option = {"chart": {"renderTo": "container", "width": 1000, "height": 700, "backgroundColor": "white"}, "colors": {}, "credits": {"enabled": false}, "drilldown": {}, "exporting": {}, "labels": {}, "legend": {}, "loading": {}, "navigation": {}, "pane": {}, "plotOptions": {"series": {"showInLegend": false}}, "series": {}, "subtitle": {}, "title": {"text": "Top 40 key topics for RealGrumpyCat", "style": {"fontSize": "20"}}, "tooltip": {}, "xAxis": {"categories": ["grumpy", "grump", "daily", "daily grump", "cat", "grumpy cat", "worst", "awful", "ever", "new", "december", "grump december", "january", "grump january", "terrible", "unfortunately", "available", "november", "grump november", "today", "october", "grump october", "meet", "christmas", "worst ever", "get", "grump february", "february", "amp", "day", "tonight", "free", "thanks", "video", "september", "grump september", "one", "year", "time", "good"], "labels": {"style": {"fontSize": "13px"}}, "title": {"text": "Topic", "style": {"fontSize": "15"}}}, "yAxis": {"title": {"text": "Importance in percentage (%)", "style": {"fontSize": "15"}}, "allowDecimals": false, "labels": {"style": {"fontSize": "15px"}, "format": "{value}%"}, "min": 0, "max": 100.0}};
+
+
+ 
+
+            var chart = new Highcharts.Chart(option);
+
+            var data = [{"data": [100.0, 98.68911307553024, 96.2299424584712, 95.94278669825898, 87.13233366664909, 82.68608435203741, 32.92458179729916, 29.88939856763582, 27.34859230556298, 26.293021117288877, 25.32239046147555, 22.42240160217088, 21.93110937932828, 21.833507520165206, 21.512604439408612, 19.934699048013265, 19.695736991851046, 18.906842199322046, 18.45918542668657, 18.31349120385521, 18.13401676298297, 17.759323966259387, 17.61667292638386, 17.089225517434635, 16.90852068429109, 16.850100880753786, 15.774153299412935, 15.774153299412935, 15.661033406940069, 14.489907076727974, 14.297165707356822, 14.10845576135454, 13.641253022747733, 13.075067295150804, 12.658756821565445, 12.50551770460845, 12.286838905372456, 12.16920749999712, 12.167854354705632, 12.065174712544534], "type": "bar", "color": "#1998CB", "name": "Retweets count"}];
+            var dataLen = data.length;
+            for (var ix = 0; ix < dataLen; ix++) {
+                chart.addSeries(data[ix]);
+            }
+ 
+
+
+
+
+
+
+
+        
+    });
+        </script>
+
+    </body>
+</html>

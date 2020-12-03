@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from extract import Scrape
-from transform import Transform
-from visualize import Visualize
+from scraper.scrape import Scrape
+from scraper.transform import Transform
+from scraper.visualize import Visualize
 import argparse
 import pandas as pd
 import os
@@ -15,35 +15,34 @@ class Execute(object):
         ap.add_argument("--start", required=True)
         ap.add_argument("--end", required=True)
         ap.add_argument("--keyword_type", required=True)
-        ap.add_argument("--save_path", required=True)
         ap.add_argument("--keys_path", required=True)
         ap.add_argument("--delay", required=False)
         ap.add_argument("--chromedriver_path", required=False)
+        ap.add_argument("--include_retweets", required=False)
         self.args = vars(ap.parse_args())
-        self.path_raw_data = f"{os.path.expanduser(self.args['save_path'])}/" \
+        self.path_raw_data = f"{os.path.expanduser('data')}/" \
                              f"{self.args['keyword']}/raw_data/df_raw.csv"
 
-    def extract(self):
-        extract = Scrape(
+    def scrape(self):
+        scraper = Scrape(
             keyword=self.args['keyword'],
             start=self.args['start'],
             end=self.args['end'],
             keyword_type=self.args['keyword_type'],
-            save_path=self.args['save_path'],
             keys_path=self.args['keys_path'],
             delay=self.args['delay'],
-            chromedriver_path=self.args['chromedriver_path']
+            chromedriver_path=self.args['chromedriver_path'],
+            include_retweets=self.args['include_retweets']
         )
-        extract.extract_all_ids()
-        extract.get_metadata()
+        scraper.extract_all_ids()
+        scraper.get_metadata()
 
     def transform(self):
         if pd.read_csv(self.path_raw_data).empty:
             return 'There is no raw data to transform'
 
         transform = Transform(
-            keyword=self.args['keyword'],
-            save_path=self.args['save_path']
+            keyword=self.args['keyword']
         )
 
         transform.get_df_clean_data()
@@ -62,8 +61,7 @@ class Execute(object):
             return 'There is no raw data to transform'
 
         visualize = Visualize(
-            keyword=self.args['keyword'],
-            save_path=self.args['save_path']
+            keyword=self.args['keyword']
         )
 
         visualize.visualize_grouped_date()
@@ -75,7 +73,7 @@ class Execute(object):
         visualize.visualize_users_by_followers()
 
     def execute_all(self):
-        self.extract()
+        self.scrape()
         self.transform()
         self.visualize()
 

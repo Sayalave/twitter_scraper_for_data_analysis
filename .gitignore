@@ -1,6 +1,8 @@
-ve*/
+ve/
+venv/
 lib/
 data/
+out/
 __pycache__
 .idea*
 .DS_Store

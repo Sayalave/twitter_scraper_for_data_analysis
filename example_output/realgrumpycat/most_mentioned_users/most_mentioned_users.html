@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/highcharts-more.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/modules/heatmap.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/6/modules/exporting.js"></script>
+    </head>
+    <body style="margin:0;padding:0">
+                <div id="container" style="width:1000px;height:700px;">Loading....</div>
+
+
+    <script>
+        $(function(){
+
+
+
+
+
+            Highcharts.setOptions({"global": {}, "lang": {}});
+            var option = {"chart": {"renderTo": "container", "width": 1000, "height": 700, "backgroundColor": "white"}, "colors": {}, "credits": {"enabled": false}, "drilldown": {}, "exporting": {}, "labels": {}, "legend": {}, "loading": {}, "navigation": {}, "pane": {}, "plotOptions": {"series": {"showInLegend": false}}, "series": {}, "subtitle": {}, "title": {"text": "Top 20 most mentioned users for RealGrumpyCat", "style": {"fontSize": "20"}}, "tooltip": {}, "xAxis": {"categories": ["realgrumpycat", "friskies", "lifetimetv", "mashable", "evilhag", "drinkgrumpycat", "amazon", "dynamitecomics", "appstore", "chroniclebooks", "jakefogelnest", "qvc", "buzzfeed", "ibooks", "playbingobash", "petsmart", "wwe", "thewebbyawards", "meltdowncomics", "nickelodeontv"], "labels": {"style": {"fontSize": "13px"}}, "title": {"text": "User mentioned", "style": {"fontSize": "15"}}}, "yAxis": {"title": {"text": "Count of mentions", "style": {"fontSize": "15"}}, "allowDecimals": false, "labels": {"style": {"fontSize": "15px"}, "format": "{value}"}}};
+
+
+ 
+
+            var chart = new Highcharts.Chart(option);
+
+            var data = [{"data": [211, 132, 43, 35, 31, 29, 25, 23, 22, 21, 21, 20, 20, 19, 19, 14, 14, 13, 13, 12], "type": "bar", "color": "#1998CB", "name": "Mentions count"}];
+            var dataLen = data.length;
+            for (var ix = 0; ix < dataLen; ix++) {
+                chart.addSeries(data[ix]);
+            }
+ 
+
+
+
+
+
+
+
+        
+    });
+        </script>
+
+    </body>
+</html>
