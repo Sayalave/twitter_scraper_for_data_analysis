@@ -43,7 +43,7 @@
 - The easier way to run the program is using Docker.
 - For example, the commands to get the data for the data for the RealGrumpyCat example. 
   1. Build the Dockerfile: `docker build --no-cache -t scraper .`
-  2. Run a container `docker run --rm -v $(PWD)/data:/app/out/ -it scraper /usr/bin/python3 main.py -keyword RealGrumpyCat -start 2012-10-01 -end 2020-11-27 -keyword_type account --keys_path twitter_keys.json --delay 1 --chromedriver_path /usr/bin/chromedriver`
+  2. Run a container `docker run --rm -v $(PWD)/data:/app/data/ -it scraper /usr/bin/python3 main.py -keyword RealGrumpyCat -start 2020-12-05 -end 2020-12-10 -keyword_type account -keys_path twitter_keys.json --delay 5 --chromedriver_path /usr/bin/chromedriver`
   3. See your data in your working directory under `~/data/`
 
 ### Command line:

@@ -21,7 +21,7 @@ class Execute(object):
                         default='/usr/local/bin/chromedriver')
         self.args = vars(ap.parse_args())
         self.path_raw_data = f"{os.path.expanduser('data')}/" \
-                             f"{self.args['keyword']}/raw_data/df_raw.csv"
+                             f"{self.args['keyword']}/.raw_data/df_raw.csv"
 
     def scrape(self):
         scraper = Scrape(

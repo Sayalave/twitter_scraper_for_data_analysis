@@ -51,7 +51,7 @@ class Scrape(object):
         self.access_token_secret = keys['access_token_secret']
 
         # Create a new directory to save raw data if it doesn't exist
-        self.path_raw_data = f"{self.save_path}/{self.keyword}/raw_data"
+        self.path_raw_data = f"{self.save_path}/{self.keyword}/.raw_data"
         if not os.path.exists(self.path_raw_data):
             os.makedirs(self.path_raw_data)
 
@@ -104,7 +104,7 @@ class Scrape(object):
         # observations without tweet id
         df = pd.DataFrame(all_data).dropna(subset=['entities'])
         save_data = Save(
-            df, self.save_path, self.keyword, 'raw_data', 'df_raw', False)
+            df, self.save_path, self.keyword, '.raw_data', 'df_raw', False)
         save_data.save_data()
 
     def extract_all_ids(self):
