@@ -16,7 +16,7 @@ class Transform(object):
         self.keyword = keyword
         self.save_path = 'data'
         self.path_raw_data = f'{os.path.expanduser(self.save_path)}/{keyword}/' \
-                             f'raw_data/df_raw.csv'
+                             f'.raw_data/df_raw.csv'
         self.clean_data_path = f'{os.path.expanduser(self.save_path)}/' \
                                f'{self.keyword}/clean_data/df_clean.csv'
         self.mapping_months = {1: 'JAN', 2: 'FEB', 3: 'MAR', 4: 'APR',
